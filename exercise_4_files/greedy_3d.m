@@ -5,7 +5,9 @@ function [ route ] = astar_3d( map, start, end_, length_cost )
     end
     % Define the limits of the map
     max_x = length(map(:,1,1));
+    
     max_y = length(map(1,:,1));
+
     max_z = length(map(1,1,:));
 
     % Children must be initalized to have nodes in it
@@ -19,7 +21,7 @@ function [ route ] = astar_3d( map, start, end_, length_cost )
 
     % Create the first node at the start position
     parent_node = node;
-    disp(parent_node.position)
+    
     parent_node.position = start;
     parent_node.h = parent_node.calc_dist_3d(end_);
     parent_node.f = parent_node.h;
@@ -47,7 +49,7 @@ function [ route ] = astar_3d( map, start, end_, length_cost )
                      (abs(x) + abs(y) + abs(z)> 1))
                     node_pos = [parent_node.position(1) + x, ...
                                 parent_node.position(2) + y,...
-                                parent_node.position(3)+z];
+                                parent_node.position(3) + z];
                     % Check if the children is within the map
                     if ~(node_pos(1) < 1 || node_pos(1) > max_x || ...
                          node_pos(2) < 1 || node_pos(2) > max_y ||...

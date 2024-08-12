@@ -7,6 +7,7 @@ clc
 % wall file by its x y z coordinates. The three last elements is
 % the size of the maze, the starting position and goal position
 load('wall.txt')
+
 % If a different named file is used, then write it into the wall variable
 % e.g. wall = maze_2;
 wall = wall;
@@ -34,10 +35,15 @@ map(start(1), start(2), start(3)) = 0;
 map(end_(1), end_(2), end_(3)) = 0;
 
 
+disp(map)
+
+
+
+
+
 %% Run the algorithm to optain the route
 route = greedy_3d(map, start, end_);
-disp(route)
-disp(route(1,:))
+
 
 %% Draw the map
 % Draw a figure to show the map and process
