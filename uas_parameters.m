@@ -1,3 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% MIT License
+% 
+% Copyright (c) 2021 David Wuthier (dwuthier@gmail.com)
+% 
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+% 
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% INITIALIZATION
 
@@ -7,7 +32,80 @@ clc
 
 %% SIMULATION PARAMETERS
 
-route = [0 0 1 ; 9 0 1 ; 9 9 1];
+
+%% Map 3d 
+layer1 = [0 0 0 0 0 0 0 0 0 0;
+0 1 0 1 1 1 1 1 1 0;
+1 1 0 1 1 0 0 0 1 0;
+0 0 0 0 1 0 1 0 1 0;
+0 1 1 0 0 0 1 0 0 0;
+0 0 1 1 1 1 1 1 1 0;
+1 0 0 0 1 0 0 0 1 0;
+1 1 1 0 0 0 1 0 1 0;
+1 1 1 1 1 1 1 0 1 0;
+0 0 0 0 0 0 0 0 0 0];
+
+layer2 = [0 0 0 0 0 0 0 0 0 0;
+0 1 0 1 1 1 1 0 1 0;
+0 1 0 1 1 0 0 0 1 0;
+0 0 0 0 1 0 0 0 1 0;
+0 1 1 0 0 0 1 0 0 0;
+0 0 1 1 1 0 1 1 1 0;
+1 0 0 0 1 0 0 0 1 0;
+1 1 1 0 0 0 1 0 1 0;
+1 1 1 0 0 1 1 0 1 0;
+0 0 0 0 0 0 0 0 0 0];
+
+layer3 = [0 0 0 0 0 0 0 0 0 0;
+0 1 0 1 1 0 1 1 1 0;
+1 1 0 1 1 0 0 0 1 0;
+0 0 0 0 1 0 1 0 1 0;
+0 0 1 0 0 0 1 0 0 0;
+0 0 1 0 1 0 1 1 1 0;
+1 0 0 0 1 0 0 0 0 0;
+1 0 1 0 0 0 1 0 1 0;
+1 0 1 1 1 1 1 0 1 0;
+0 0 0 0 0 0 0 0 0 0];
+
+map_3d = zeros(10,10,3);
+map_3d(:,:,1) = layer1;
+map_3d(:,:,2) = layer2;
+map_3d(:,:,3) = layer3;
+
+
+
+%Map 2d
+
+map_2d = [0 0 0 0 0 0 0 0 0 0;
+       0 1 0 1 1 1 1 1 1 0;
+       1 1 0 1 1 0 0 0 1 0;
+       0 0 0 0 1 0 1 0 1 0;
+       0 1 1 0 0 0 1 0 0 0;
+       0 0 1 1 1 1 1 1 1 0;
+       1 0 0 0 1 0 0 0 1 0;
+       1 1 1 0 0 0 1 0 1 0;
+       1 1 1 1 1 1 1 0 1 0;
+       0 0 0 0 0 0 0 0 0 0];
+
+rot90(map_3d,3)
+
+start_3d =[1 1 2]
+finish_3d= [4 6 2]
+
+start_2d = [0 0 ]
+finish_2d =[9 9 ]
+route_2d =greedy_2d(map_2d,start_2d,finish_2d);
+route_3d =greedy_3d(map_3d,start_3d,finish_3d);
+
+
+
+route_temp = transpose(rot90(route_3d,1))-1;
+
+X = route_temp(:,2);
+Y = route_temp(:,3);
+Z = route_temp(:,1);
+
+route = [X, Y ,Z]
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
