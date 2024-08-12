@@ -43,11 +43,11 @@ reference_area = pi * 75e-3^2;
 
 %% Exercise 6.2
 
-pos_p = 2;
+pos_p = 4;
 pos_i = 0.0001;
 pos_d = 0.000001;
 
-vel_p = 2;
+vel_p = 2.2;
 vel_i = 0.0001;
 vel_d = 0.000001;
 
