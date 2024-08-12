@@ -7,7 +7,7 @@ clc
 
 %% SIMULATION PARAMETERS
 
-route = [0 0 1 ; 9 0 1 ; 9 9 1];
+route = [0 0 1 ; 9 0 2 ; 9 9 1];
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
@@ -40,3 +40,15 @@ mix_matrix = inv(motor_constant * allocation_matrix) ;
 air_density = 1.2041;
 drag_coefficient = 0.47;
 reference_area = pi * 75e-3^2;
+
+%% Exercise 6.2
+
+pos_p = 1;
+pos_i = 0.0001;
+pos_d = 0.000001;
+
+vel_p = 1;
+vel_i = 0.0001;
+vel_d = 0.000001;
+
+
