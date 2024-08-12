@@ -34,43 +34,7 @@ clc
 
 
 %% Map 3d 
-layer1 = [0 0 0 0 0 0 0 0 0 0;
-0 1 0 1 1 1 1 1 1 0;
-1 1 0 1 1 0 0 0 1 0;
-0 0 0 0 1 0 1 0 1 0;
-0 1 1 0 0 0 1 0 0 0;
-0 0 1 1 1 1 1 1 1 0;
-1 0 0 0 1 0 0 0 1 0;
-1 1 1 0 0 0 1 0 1 0;
-1 1 1 1 1 1 1 0 1 0;
-0 0 0 0 0 0 0 0 0 0];
-
-layer2 = [0 0 0 0 0 0 0 0 0 0;
-0 1 0 1 1 1 1 0 1 0;
-0 1 0 1 1 0 0 0 1 0;
-0 0 0 0 1 0 0 0 1 0;
-0 1 1 0 0 0 1 0 0 0;
-0 0 1 1 1 0 1 1 1 0;
-1 0 0 0 1 0 0 0 1 0;
-1 1 1 0 0 0 1 0 1 0;
-1 1 1 0 0 1 1 0 1 0;
-0 0 0 0 0 0 0 0 0 0];
-
-layer3 = [0 0 0 0 0 0 0 0 0 0;
-0 1 0 1 1 0 1 1 1 0;
-1 1 0 1 1 0 0 0 1 0;
-0 0 0 0 1 0 1 0 1 0;
-0 0 1 0 0 0 1 0 0 0;
-0 0 1 0 1 0 1 1 1 0;
-1 0 0 0 1 0 0 0 0 0;
-1 0 1 0 0 0 1 0 1 0;
-1 0 1 1 1 1 1 0 1 0;
-0 0 0 0 0 0 0 0 0 0];
-
-map_3d = zeros(10,10,3);
-map_3d(:,:,1) = layer1;
-map_3d(:,:,2) = layer2;
-map_3d(:,:,3) = layer3;
+maze_1_3D;
 
 
 
@@ -87,7 +51,7 @@ map_2d = [0 0 0 0 0 0 0 0 0 0;
        1 1 1 1 1 1 1 0 1 0;
        0 0 0 0 0 0 0 0 0 0];
 
-rot90(map_3d,3)
+%rot90(map,3)
 
 start_3d =[1 1 2]
 finish_3d= [4 6 2]
@@ -95,17 +59,17 @@ finish_3d= [4 6 2]
 start_2d = [0 0 ]
 finish_2d =[9 9 ]
 route_2d =greedy_2d(map_2d,start_2d,finish_2d);
-route_3d =greedy_3d(map_3d,start_3d,finish_3d);
+route_3d =greedy_3d(map,start_3d,finish_3d);
 
 
 
-route_temp = transpose(rot90(route_3d,1))-1;
+%route_temp = transpose(rot90(route_3d,1))-1;
 
-X = route_temp(:,2);
-Y = route_temp(:,3);
-Z = route_temp(:,1);
+%X = route_temp(:,2);
+%Y = route_temp(:,3);
+%Z = route_temp(:,1);
 
-route = [X, Y ,Z]
+route = greedy_3d(map,start_3d,finish_3d) -1     %[X, Y ,Z]
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
