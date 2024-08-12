@@ -13,18 +13,18 @@ clear all;
 maze_1_3D;
 
 start  =[1 1 2]
-end_ = [2,1,2]
+end_ = [4,6,2]
 
-%start = [0, 0];
-%end_ = [5,0];
+%start = [1, 1];
+%end_ = [6,1];
 
 fig_num = 1;
 
 
 plot_map(map, fig_num);
-plot_start_stop(start, end_, fig_num)
+plot_start_stop(start-1, end_-1, fig_num)
 
-
+map = rot90(map,3)
 
 route = greedy_3d(map,start,end_)
 

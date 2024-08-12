@@ -69,7 +69,7 @@ route_3d =greedy_3d(map,start_3d,finish_3d);
 %Y = route_temp(:,3);
 %Z = route_temp(:,1);
 
-route = greedy_3d(map,start_3d,finish_3d) -1     %[X, Y ,Z]
+route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1     %[X, Y ,Z]
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
