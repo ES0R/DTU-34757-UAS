@@ -10,7 +10,7 @@ clear all;
 
 %%
 
-maze_1;
+maze_1_3D;
 start = [0, 0];
 end_ = [5,0];
 
