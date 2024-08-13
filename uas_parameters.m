@@ -4,47 +4,41 @@
 clear
 close all
 clc
-
-%% SIMULATION PARAMETERS
-
-
+addpath('maze\')
+addpath('exercise_4_files\')
 %% Map 3d 
 maze_1_3D;
 
-
-
-%Map 2d
-
-map_2d = [0 0 0 0 0 0 0 0 0 0;
-       0 1 0 1 1 1 1 1 1 0;
-       1 1 0 1 1 0 0 0 1 0;
-       0 0 0 0 1 0 1 0 1 0;
-       0 1 1 0 0 0 1 0 0 0;
-       0 0 1 1 1 1 1 1 1 0;
-       1 0 0 0 1 0 0 0 1 0;
-       1 1 1 0 0 0 1 0 1 0;
-       1 1 1 1 1 1 1 0 1 0;
-       0 0 0 0 0 0 0 0 0 0];
-
-%rot90(map,3)
-
-start_3d =[1 1 2]
-finish_3d= [4 6 2]
-
-start_2d = [0 0 ]
-finish_2d =[9 9 ]
-route_2d =greedy_2d(map_2d,start_2d,finish_2d);
-route_3d =greedy_3d(map,start_3d,finish_3d);
-
-
-
-%route_temp = transpose(rot90(route_3d,1))-1;
-
-%X = route_temp(:,2);
-%Y = route_temp(:,3);
-%Z = route_temp(:,1);
+start_3d =[1 1 2];
+finish_3d= [4 6 2];
 
 route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1     %[X, Y ,Z]
+
+route = route_trimmer(route)
+
+route =   [0     0     1;
+     7     0     1]
+
+%% Position controller gains
+
+pos_p = 1.8;
+pos_i = 0;
+pos_d = 0;
+
+pos_z_p = 1;
+pos_z_i = 0;
+pos_z_d = 0;
+
+vel_p = 5;
+vel_i = 0;
+vel_d = 0;
+
+vel_z_p = 1;
+vel_z_i = 0;
+vel_z_d = 0;
+
+%% Parameters
+
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
@@ -78,22 +72,6 @@ air_density = 1.2041;
 drag_coefficient = 0.47;
 reference_area = pi * 75e-3^2;
 
-%% Exercise 6.2
 
-pos_p = 1.8;
-pos_i = 0;
-pos_d = 0;
-
-pos_z_p = 1;
-pos_z_i = 0;
-pos_z_d = 0;
-
-vel_p = 4;
-vel_i = 0;
-vel_d = 0;
-
-vel_z_p = 1;
-vel_z_i = 0;
-vel_z_d = 0;
 
 
