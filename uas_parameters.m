@@ -1,13 +1,8 @@
 
-%% INITIALIZATION
-
-clear
-close all
-clc
 
 %% SIMULATION PARAMETERS
 
-route = [0 0 1 ; 1 0 1];
+route = [0 0 1 ; 9 0 1];
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
@@ -43,12 +38,19 @@ reference_area = pi * 75e-3^2;
 
 %% Exercise 6.2
 
-pos_p = 4;
-pos_i = 0.0001;
-pos_d = 0.000001;
+pos_p = 1.8;
+pos_i = 0;
+pos_d = 0;
 
-vel_p = 2.2;
-vel_i = 0.0001;
-vel_d = 0.000001;
+pos_z_p = 1;
+pos_z_i = 0;
+pos_z_d = 0;
 
+vel_p = 4;
+vel_i = 0;
+vel_d = 0;
+
+vel_z_p = 1;
+vel_z_i = 0;
+vel_z_d = 0;
 
