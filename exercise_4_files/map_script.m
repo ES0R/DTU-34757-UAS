@@ -7,8 +7,22 @@ max_x = 10;
 max_y = 10;
 map = zeros(max_x, max_y);
 
+map = [0 0 0 0 0 0 0 0 0 0;
+       0 1 0 1 1 1 1 1 1 0;
+       1 1 0 1 1 0 0 0 1 0;
+       0 0 0 0 1 0 1 0 1 0;
+       0 1 1 0 0 0 1 0 0 0;
+       0 0 1 1 1 1 1 1 1 0;
+       1 0 0 0 1 0 0 0 1 0;
+       1 1 1 0 0 0 1 0 1 0;
+       1 1 1 1 1 1 1 0 1 0;
+       0 0 0 0 0 0 0 0 0 0];
+
+rot90(map,3);
+
 % Generate random obstacles. A 1 in the map is regarded as
 % an obstacle
+%{
 obs_per = 0.3;
 for x = 1:max_x
     for y = 1:max_y
@@ -17,14 +31,18 @@ for x = 1:max_x
         end
     end
 end
+%}
 
 % Define the starting and end position
 start = [1, 1];
-end_ = [10, 10];
+end_ = [4, 6];
 
 % Make sure the start and end is not an obstacle
+
+%{
 map(start(1),start(2)) = 0;
 map(end_(1),end_(2)) = 0;
+%}
 
 %% Run the algorithm to optain the route
 route = greedy_2d(map, start, end_);
@@ -71,4 +89,8 @@ for i = 2:length(route)
     pause(0.1)
     route(i,:)
 end
+
+
+
+route =  route -1;
 hold off

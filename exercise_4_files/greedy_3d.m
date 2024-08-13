@@ -1,11 +1,14 @@
-function [ route ] = astar_2d( map, start, end_, length_cost )
+function [ route ] = astar_3d( map, start, end_, length_cost )
     % Check if length_cost was given
     if ~exist('length_cost', 'var')
         length_cost = 1;
     end
     % Define the limits of the map
     max_x = length(map(:,1,1));
+    
     max_y = length(map(1,:,1));
+
+    max_z = length(map(1,1,:));
 
     % Children must be initalized to have nodes in it
     % The arrays keeping track of the nodes must initialized 
@@ -18,10 +21,11 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
 
     % Create the first node at the start position
     parent_node = node;
+    
     parent_node.position = start;
-    parent_node.h = parent_node.calc_dist(end_);
+    parent_node.h = parent_node.calc_dist_3d(end_);
     parent_node.f = parent_node.h;
-
+    
     % Flag used to skip nodes which is already added
     continue_flag = 0;
 
@@ -31,23 +35,27 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
 
     % Keep running until the end point is reached
     while ~(parent_node.position(1) == end_(1) && ...
-            parent_node.position(2) == end_(2))
+            parent_node.position(2) == end_(2) && ...
+            parent_node.position(3)== end_(3))
         % Run through the surronding squares
         for x = -1:1
             for y = -1:1
+                for z =-1:1
                 % Skip the node itself
                 % And also dont allow for diagonal movement
                 % As that will create problems when navigating the 
                 % real maze
-                if ~((x == 0 && y == 0) ||...
-                     (abs(x) + abs(y) > 1))
+                if ~((x == 0 && y == 0 && z==0) ||...
+                     (abs(x) + abs(y) + abs(z)> 1))
                     node_pos = [parent_node.position(1) + x, ...
-                                parent_node.position(2) + y];
+                                parent_node.position(2) + y,...
+                                parent_node.position(3) + z];
                     % Check if the children is within the map
                     if ~(node_pos(1) < 1 || node_pos(1) > max_x || ...
-                         node_pos(2) < 1 || node_pos(2) > max_y)
+                         node_pos(2) < 1 || node_pos(2) > max_y ||...
+                         node_pos(3) < 1 || node_pos(3) > max_z)
                         % Check if the children is an obstacle
-                        if ~(map(node_pos(1), node_pos(2)) == 1)
+                        if ~(map(node_pos(1), node_pos(2),node_pos(3)) == 1)
                             % Check if the node have been visited
                             for closed_i = 1:length(closed)
                                 if node_pos == closed(closed_i).position
@@ -97,6 +105,7 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
                     end
                 end
             end
+            end
         end
 
     % Add the parent node to the list of closed nodes
@@ -135,7 +144,8 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
     route = [parent_node.position];
     % Keep going until the route is back at the start position
     while  ~(parent_node.position(1) == start(1) && ...
-             parent_node.position(2) == start(2))
+             parent_node.position(2) == start(2) &&...
+             parent_node.position(3)==start(3))
        % Update the route by going backwards through the parents
        parent_node = parent_node.parent;
        route = cat(1,route,parent_node.position);

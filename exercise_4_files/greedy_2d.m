@@ -6,6 +6,7 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
     % Define the limits of the map
     max_x = length(map(:,1,1));
     max_y = length(map(1,:,1));
+    
 
     % Children must be initalized to have nodes in it
     % The arrays keeping track of the nodes must initialized 
@@ -17,7 +18,13 @@ function [ route ] = astar_2d( map, start, end_, length_cost )
     children = [];
 
     % Create the first node at the start position
+    
     parent_node = node;
+
+   
+    
+
+
     parent_node.position = start;
     parent_node.h = parent_node.calc_dist(end_);
     parent_node.f = parent_node.h;
