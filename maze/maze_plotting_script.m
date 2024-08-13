@@ -1,4 +1,5 @@
 
+
 % This file contains parameters and calculations needed for running
 % MatLab with rotorS ROS package for interfacing with a position controlled
 % drone
@@ -29,3 +30,4 @@ map = rot90(map,3)
 route = greedy_3d(map,start,end_)
 
 plot_route(route, fig_num);
+
