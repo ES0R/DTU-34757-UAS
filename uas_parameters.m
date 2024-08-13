@@ -21,7 +21,7 @@ route =   [0     0     1;
 
 %% Position controller gains
 
-pos_p = 1.8;
+pos_p = 1.9;
 pos_i = 0;
 pos_d = 0;
 
@@ -29,7 +29,7 @@ pos_z_p = 1;
 pos_z_i = 0;
 pos_z_d = 0;
 
-vel_p = 5;
+vel_p = 10;
 vel_i = 0;
 vel_d = 0;
 
