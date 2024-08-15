@@ -24,15 +24,15 @@ pos_p = 1.9;
 pos_i = 0;
 pos_d = 0;
 
-pos_z_p = 1;
+pos_z_p = 1.9;
 pos_z_i = 0;
 pos_z_d = 0;
 
-vel_p = 1.6;
+vel_p = 1.9;
 vel_i = 0;
 vel_d = 0;
 
-vel_z_p = 1;
+vel_z_p = 1.9;
 vel_z_i = 0;
 vel_z_d = 0;
 
@@ -44,15 +44,15 @@ waypoints{1} = [0 ; 0 ; 1];
 waypoints{2} = [9 ; 9 ; 1];
 % Fix this...
 order = 7;
-corridors.times = [1 3 5];  % Tim
+corridors.times = [2 3 4.6];  % Tim
 % e intervals within the [0, 5] range
 
 % Define x, y, z bounds for each segment within the maze
-corridors.x_lower = [2 7 9];  % Incremental x bounds as the drone moves right
-corridors.x_upper = [3 9 9.5];
+corridors.x_lower = [5.5 8.8 8.8];  % Incremental x bounds as the drone moves right
+corridors.x_upper = [8 9 9];
 
-corridors.y_lower = [0 0 7];  % Incremental y bounds as the drone moves upward
-corridors.y_upper = [0 2 9.5];
+corridors.y_lower = [-0.5 1 8.8];  % Incremental y bounds as the drone moves upward
+corridors.y_upper = [0 2 9];
 
 corridors.z_lower = [0 0 0];  % Keeping z constant since it's a 2D maze at z = 1
 corridors.z_upper = [2 2 2];  % Slight tolerance in z-axis
