@@ -10,7 +10,7 @@ addpath('exercise_4_files\')
 maze_1_3D;
 
 start_3d =[0 0 1] + 1;
-finish_3d= [9 9 1] + 1;
+finish_3d= [3 0 1] + 1;
 
 route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1     %[X, Y ,Z]
 
@@ -57,7 +57,7 @@ corridors.y_upper = [0 2 9];
 corridors.z_lower = [0 0 0];  % Keeping z constant since it's a 2D maze at z = 1
 corridors.z_upper = [2 2 2];  % Slight tolerance in z-axis
 % ...until here
-make_plots = true;
+make_plots = false;
 
 poly_traj = uas_minimum_snap(knots, order, waypoints, corridors, make_plots);
 
@@ -99,4 +99,11 @@ reference_area = pi * 75e-3^2;
 
 
 
+%% Simulate
 
+open_system('uas_main');  
+simOut = sim('uas_main', 'ReturnWorkspaceOutputs', 'on');
+
+position_signal = simOut.logsout.getElement('drone_pos').Values;
+
+step_response = analyze_step_response(position_signal)
