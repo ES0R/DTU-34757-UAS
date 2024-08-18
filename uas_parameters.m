@@ -101,8 +101,8 @@ reference_area = pi * 75e-3^2;
 
 %% Simulate
 
-pos_p = 3.5;
-vel_p = 2.1;
+pos_p = 1;
+vel_p = 1;
 
 simulate = false;
 
