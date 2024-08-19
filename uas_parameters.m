@@ -9,33 +9,58 @@ addpath('exercise_4_files\')
 %% Map 3d 
 maze_1_3D;
 
-start_3d =[1 1 2];
-finish_3d= [4 6 2];
+start_3d =[0 0 1] + 1;
+finish_3d= [9 9 1] + 1;
 
 route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1     %[X, Y ,Z]
 
 route = route_trimmer(route)
 
-route =   [0     0     1;
-     7     0     1]
+
 
 %% Position controller gains
 
-pos_p = 1.8;
+pos_p = 1.9;
 pos_i = 0;
 pos_d = 0;
 
-pos_z_p = 1;
+pos_z_p = 1.9;
 pos_z_i = 0;
 pos_z_d = 0;
 
-vel_p = 5;
+vel_p = 1.9;
 vel_i = 0;
 vel_d = 0;
 
-vel_z_p = 1;
+vel_z_p = 1.9;
 vel_z_i = 0;
 vel_z_d = 0;
+
+%% Trajectory
+
+knots = [0 5];
+waypoints = cell(1,2);
+waypoints{1} = [0 ; 0 ; 1];
+waypoints{2} = [9 ; 9 ; 1];
+% Fix this...
+order = 7;
+corridors.times = [2 3 4.6];  % Tim
+% e intervals within the [0, 5] range
+
+% Define x, y, z bounds for each segment within the maze
+corridors.x_lower = [5.5 8.8 8.8];  % Incremental x bounds as the drone moves right
+corridors.x_upper = [8 9 9];
+
+corridors.y_lower = [-0.5 1 8.8];  % Incremental y bounds as the drone moves upward
+corridors.y_upper = [0 2 9];
+
+corridors.z_lower = [0 0 0];  % Keeping z constant since it's a 2D maze at z = 1
+corridors.z_upper = [2 2 2];  % Slight tolerance in z-axis
+% ...until here
+make_plots = true;
+
+poly_traj = uas_minimum_snap(knots, order, waypoints, corridors, make_plots);
+
 
 %% Parameters
 
