@@ -17,8 +17,10 @@ function response_info = analyze_step_response(simout)
     
     % Extract the time and data from the timeseries
     time = simout.Time;
-    data = simout.Data(1,:);
-
+    data = simout.Data(:,3,:);
+    data = reshape(simout.Data(:,3,:), [126, 1]);
+    size(data)
+    size(time)
     % Preallocate a structure to hold the response information for each dimension
     response_info = struct();
 
