@@ -1,16 +1,13 @@
 
 %% INITIALIZATION
 
-clear
-close all
-clc
 addpath('maze\')
 addpath('exercise_4_files\')
 %% Map 3d
 maze_1_3D;
 
 start_3d =[0 0 1] + 1;
-finish_3d= [9 0 1] + 1;
+finish_3d= [1 0 1] + 1;
 
 route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1;     %[X, Y ,Z]
 
@@ -101,8 +98,8 @@ reference_area = pi * 75e-3^2;
 
 %% Simulate
 
-pos_p = 1;
-vel_p = 1;
+pos_p = 2.2;
+vel_p = 1.9;
 
 simulate = true;
 
@@ -111,6 +108,8 @@ routes = {
     [0 0 1; 3 0 1], 
     [0 0 1; 9 0 1]
 };
+
+
 
 if simulate
     open_system('uas_main');
@@ -123,8 +122,8 @@ if simulate
         % Initialize results storage for each route
         results = struct('pos_p', [], 'vel_p', [], 'rise_time', [], 'settling_time', [], 'overshoot', [], 'undershoot', [], 'peaktime', []);
         
-        pos_p_range = 1:0.1:5;  % Example range for position gain
-        vel_p_range = 1:0.1:5;  % Example range for velocity gain
+        pos_p_range = 1.5:0.25:4;  % Example range for position gain
+        vel_p_range = 1.5:0.25:4;  % Example range for velocity gain
 
         total_iterations = length(pos_p_range) * length(vel_p_range);
         current_iteration = 0;
@@ -163,13 +162,13 @@ if simulate
         end
 
         % Convert the results to a table for easier analysis
-        results_table = struct2table(results);
+        results = struct2table(results);
 
         % Filter results for 1% overshoot max
-        zero_overshoot_results = results_table(results_table.overshoot <= 1, :);
+        %results = results_table(results_table.overshoot <= 1, :);
 
         % Sort the filtered results by settling time in ascending order
-        sorted_results = sortrows(zero_overshoot_results, 'peaktime');
+        sorted_results = sortrows(results, 'peaktime');
 
         % Display the sorted results
         disp(sorted_results);

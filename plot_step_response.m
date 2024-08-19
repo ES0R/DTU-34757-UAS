@@ -19,9 +19,12 @@ function plot_step_response(position_signal, step)
     step_line.LabelHorizontalAlignment = 'right';
 
 
-    xline(rise_time, '--', sprintf('Rise Time: %.2fs', rise_time), 'Color', [0, 0.5, 0], 'LineWidth', 1.5);
-    xline(settling_time, '--', sprintf('Settling Time: %.2fs', settling_time),'Color', [0.8, 0, 0] , 'LineWidth', 1.5);
-    
+    rise_line=xline(rise_time, '--', sprintf('Rise Time: %.2fs', rise_time), 'Color', [0, 0.5, 0], 'LineWidth', 1.5);
+    rise_line.LabelVerticalAlignment = 'bottom';
+
+    settling_line = xline(settling_time, '--', sprintf('Settling Time: %.2fs', settling_time),'Color', [0.8, 0, 0.6] , 'LineWidth', 1.5);
+    settling_line.LabelVerticalAlignment = 'bottom';
+
     if overshoot > 0
         yline(step + overshoot/100, 'r--', sprintf('Overshoot: %.2f%%', overshoot), 'LineWidth', 1.5);
     end
