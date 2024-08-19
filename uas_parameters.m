@@ -104,7 +104,7 @@ reference_area = pi * 75e-3^2;
 pos_p = 1;
 vel_p = 1;
 
-simulate = false;
+simulate = true;
 
 routes = {
     [0 0 1; 1 0 1], 
@@ -123,8 +123,8 @@ if simulate
         % Initialize results storage for each route
         results = struct('pos_p', [], 'vel_p', [], 'rise_time', [], 'settling_time', [], 'overshoot', [], 'undershoot', [], 'peaktime', []);
         
-        pos_p_range = 1:0.2:5;  % Example range for position gain
-        vel_p_range = 1:0.2:5;  % Example range for velocity gain
+        pos_p_range = 1:0.1:5;  % Example range for position gain
+        vel_p_range = 1:0.1:5;  % Example range for velocity gain
 
         total_iterations = length(pos_p_range) * length(vel_p_range);
         current_iteration = 0;
