@@ -101,14 +101,13 @@ reference_area = pi * 75e-3^2;
 pos_p = 2.2;
 vel_p = 1.9;
 
-simulate = true;
+simulate = false;
 
 routes = {
     [0 0 1; 1 0 1], 
     [0 0 1; 3 0 1], 
     [0 0 1; 9 0 1]
 };
-
 
 
 if simulate

@@ -7,10 +7,13 @@ function plot_step_response(position_signal, step)
     settling_time = step_response.SettlingTime;
     overshoot = step_response.Overshoot;
     undershoot = step_response.Undershoot;
-    
     % Plot the step response
+    
+    data = position_signal.Data(:,3,:);
+    data = reshape(position_signal.Data(:,3,:), [126, 1]);
+
     figure;
-    plot(position_signal.Time, position_signal.Data(1,:), 'b', 'LineWidth', 1.5);
+    plot(position_signal.Time, data, 'b', 'LineWidth', 1.5);
     hold on;
     
     % Mark the rise time, settling time, and overshoot on the plot
@@ -20,13 +23,13 @@ function plot_step_response(position_signal, step)
 
 
     rise_line=xline(rise_time, '--', sprintf('Rise Time: %.2fs', rise_time), 'Color', [0, 0.5, 0], 'LineWidth', 1.5);
-    rise_line.LabelVerticalAlignment = 'bottom';
+    rise_line.LabelVerticalAlignment = 'middle';
 
     settling_line = xline(settling_time, '--', sprintf('Settling Time: %.2fs', settling_time),'Color', [0.8, 0, 0.6] , 'LineWidth', 1.5);
-    settling_line.LabelVerticalAlignment = 'bottom';
+    settling_line.LabelVerticalAlignment = 'middle';
 
     if overshoot > 0
-        yline(step + overshoot/100, 'r--', sprintf('Overshoot: %.2f%%', overshoot), 'LineWidth', 1.5);
+        yline(step * (1+overshoot/100), 'r--', sprintf('Overshoot: %.2f%%', overshoot), 'LineWidth', 1.5);
     end
     
 
