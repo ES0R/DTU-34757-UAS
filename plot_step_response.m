@@ -9,7 +9,11 @@ function plot_step_response(position_signal, step)
     undershoot = step_response.Undershoot;
     % Plot the step response
     
-    data = position_signal.Data(1,:);
+    %data = position_signal.Data(:,3,:);
+    data = position_signal.Data(:,2);
+    size(data)
+
+
 
     figure;
     plot(position_signal.Time, data, 'b', 'LineWidth', 1.5);
