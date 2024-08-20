@@ -9,9 +9,11 @@ maze_1_3D;
 start_3d =[0 0 1] + 1;
 finish_3d= [9 0 1] + 1;
 
-route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1;     %[X, Y ,Z]
+%route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1;     %[X, Y ,Z]
 
-route = route_trimmer(route);
+%route = route_trimmer(route);
+
+
 
 
 
