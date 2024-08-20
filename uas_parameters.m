@@ -7,7 +7,7 @@ addpath('exercise_4_files\')
 maze_1_3D;
 
 start_3d =[0 0 1] + 1;
-finish_3d= [1 0 1] + 1;
+finish_3d= [3 0 1] + 1;
 
 route = greedy_3d(rot90(map,3),start_3d,finish_3d) -1;     %[X, Y ,Z]
 
@@ -98,10 +98,10 @@ reference_area = pi * 75e-3^2;
 
 %% Simulate
 
-pos_p = 1.9;
-vel_p = 1.9;
+pos_p = 2.6;
+vel_p = 2.1;
 
-simulate = true;
+simulate = false;
 
 routes = {
     [0 0 1; 1 0 1], 
